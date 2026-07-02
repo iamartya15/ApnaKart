@@ -1,0 +1,25 @@
+config:
+  target: "http://localhost:5000/api"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+      rampTo: 500
+      name: "Ramp up load"
+    - duration: 300
+      arrivalRate: 500
+      rampTo: 2000
+      name: "Sustain high load (Targeting 10k users)"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+scenarios:
+  - name: "Aggregator browsing and search"
+    flow:
+      - get:
+          url: "/search?q=shoes"
+      - think: 2
+      - get:
+          url: "/compare?p1=amazon-sneakers&p2=meesho-sneakers"
+      - think: 1
+      - get:
+          url: "/liveness"

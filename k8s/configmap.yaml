@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apnakart-config
+  namespace: default
+data:
+  NODE_ENV: "production"
+  PORT: "5000"
+  MONGO_URI: "mongodb://mongodb-service:27017/apnakart"
+  REDIS_URL: "redis://redis-service:6379"
+  VECTOR_SEARCH_PROVIDER: "pinecone"
